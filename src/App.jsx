@@ -1,15 +1,15 @@
 import { BrowserRouter } from "react-router-dom"
-import LogIn from "./Components/LogIn/LogInView"
-import SignUp from "./Components/LogIn/SignUp"
+import AuthRoutes from "./routes/AuthRoutes"
+import DashRoutes from "./routes/DashRoutes"
 import "./dist/output.css"
 function App() {
 	return (
-		<>
+		<div className="bg-slate-800 min-h-screen">
 			<BrowserRouter>
-				<LogIn />
-				{/* <SignUp /> */}
+				<AuthRoutes />
+				<DashRoutes />
 			</BrowserRouter>
-		</>
+		</div>
 	)
 }
 
