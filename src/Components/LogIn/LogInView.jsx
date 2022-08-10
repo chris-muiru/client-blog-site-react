@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom"
-import github from "../imgs/github-sign.png"
-import facebook from "../imgs/facebook(1).png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons"
 const LogIn = () => {
