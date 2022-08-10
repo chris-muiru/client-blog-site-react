@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons"
 const SignUp = () => {
 	return (
-		<div className="bg-black pt-10 min-h-screen">
-			<h2 className="text-white text-3xl text-center font-bold mt-10">
+		<div className="bg-slate-900 pt-10 min-h-screen">
+			<h2 className="text-white text-3xl text-center font-bold mt-6">
 				Sign Up
 			</h2>
-			<div className="w-3/4 m-auto mt-10  lg:w-1/3 md:mt-20">
+			<div className="w-3/4 m-auto mt-10  lg:w-1/3 md:mt-10">
 				<p className="text-white">Sign up using options:</p>
-				<div className="mt-10 grid grid-cols-2 gap-6 md:gap-24">
+				<div className="mt-10 grid grid-cols-2 gap-6 md:gap-22">
 					<div className="relative bg-green-500 w-full h-20 rounded-md">
 						<FontAwesomeIcon
 							icon={faGoogle}
@@ -26,7 +26,7 @@ const SignUp = () => {
 				</div>
 
 				<div className="mt-20 relative">
-					<form action="" className="flex flex-col space-y-32">
+					<form action="" className="flex flex-col space-y-20">
 						<div className="space-y-20">
 							<input
 								type="text"
