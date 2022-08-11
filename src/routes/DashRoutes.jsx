@@ -1,8 +1,8 @@
 import React from "react"
 import { Route, Routes } from "react-router-dom"
-import CreateBlog from "../Components/Dashboard/CreateBlogView"
+import CreateBlog from "../Components/Blog/CreateBlogView"
 import Dash from "../Components/Dashboard/DashView"
-import BlogView from "../Components/Dashboard/BlogView"
+import BlogView from "../Components/Blog/BlogView"
 const DashRoutes = () => {
 	return (
 		<Routes>
