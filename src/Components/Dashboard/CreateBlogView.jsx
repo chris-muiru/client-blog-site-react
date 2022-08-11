@@ -22,7 +22,7 @@ const CreateBlogView = () => {
 				<textarea
 					type="text"
 					placeholder="Enter text here...."
-					className="pl-10  text-white w-full h-64 rounded-md bg-slate-700"
+					className="pl-10  text-white w-full min-h-[400px] rounded-md bg-slate-700"
 				></textarea>
 				<button
 					type="submit"
