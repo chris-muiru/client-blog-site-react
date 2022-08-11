@@ -1,7 +1,7 @@
 import GroupBlogHighlightView from "./GroupBlogHighlightView"
 import NavBarView from "./NavBarView"
 import SideNavView from "./SideNavView"
-import SocialsView from "./SocialsView"
+import SocialsView from "../Socials/SocialsView"
 
 const DashView = () => {
 	return (
