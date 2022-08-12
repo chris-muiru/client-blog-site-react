@@ -46,7 +46,7 @@ const LogIn = () => {
 					</form>
 					<p className="text-white mt-5 md:mt-10 pb-10">
 						Don't have account?&nbsp;
-						<Link className="text-white font-bold" to="/signUp">
+						<Link className="text-green-700 font-bold" to="/signUp">
 							Sign up
 						</Link>
 					</p>
