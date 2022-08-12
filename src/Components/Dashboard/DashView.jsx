@@ -6,7 +6,6 @@ import SocialsView from "../Socials/SocialsView"
 const DashView = () => {
 	return (
 		<div className="">
-			<NavBarView />
 			<div className="flex">
 				{/* <SideNavView /> */}
 				<GroupBlogHighlightView />
