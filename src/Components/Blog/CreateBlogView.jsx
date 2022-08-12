@@ -5,7 +5,6 @@ import LikeView from "./LikeView"
 const CreateBlogView = () => {
 	return (
 		<div>
-			<NavBar />
 			<div className="flex flex-col w-1/2 m-auto ">
 				<form action="" class="flex  flex-col items-center space-y-4 mt-5">
 					<input
