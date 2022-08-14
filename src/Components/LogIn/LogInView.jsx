@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons"
+import { loginUser } from "./loginLogic"
 const LogIn = () => {
 	return (
 		<div className="bg-slate-900 min-h-screen">
@@ -26,16 +27,22 @@ const LogIn = () => {
 				</div>
 
 				<div className="mt-20 relative">
-					<form action="" className="flex flex-col space-y-32">
+					<form
+						method="post"
+						className="flex flex-col space-y-32"
+						onSubmit={loginUser}
+					>
 						<div className="space-y-20">
 							<input
 								type="text"
 								placeholder="Username"
+								name="username"
 								className="w-full rounded-md p-4"
 							/>
 							<input
 								type="password"
 								placeholder="password"
+								name="password"
 								className="w-full rounded-md p-4"
 							/>
 						</div>
