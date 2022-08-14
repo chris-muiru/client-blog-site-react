@@ -1,10 +1,10 @@
 import React from "react"
-import NavBar from "../Dashboard/NavBarView"
-import LikeView from "./LikeView"
+import NavBarView from "../Dashboard/NavBarView"
 
 const CreateBlogView = () => {
 	return (
 		<div>
+			<NavBarView />
 			<div className="flex flex-col w-1/2 m-auto ">
 				<form action="" class="flex  flex-col items-center space-y-4 mt-5">
 					<input

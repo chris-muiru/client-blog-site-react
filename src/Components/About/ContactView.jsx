@@ -1,11 +1,13 @@
 import { faMailBulk, faPhone } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
+import NavBarView from "../Dashboard/NavBarView"
 import SharedView from "./SharedView"
 
 const ContactView = () => {
 	return (
 		<>
+			<NavBarView />
 			<SharedView heading="Contacts">
 				<div className="flex flex-col space-y-7">
 					<div>

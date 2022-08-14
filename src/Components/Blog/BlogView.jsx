@@ -6,6 +6,7 @@ import LikeView from "./LikeView"
 const BlogView = () => {
 	return (
 		<>
+			<NavBarView />
 			<div className="w-3/4 relative  m-auto">
 				<LikeView />
 				<div className="bg-slate-100 min-h-[200px] mt-10 m-auto rounded-md">
