@@ -8,8 +8,8 @@ function App() {
 		<div className="bg-slate-800 min-h-screen">
 			<BrowserRouter>
 				<AuthRoutes />
-				{/* <DashRoutes /> */}
-				<Main />
+				<DashRoutes />
+				{/* <Main /> */}
 			</BrowserRouter>
 		</div>
 	)
