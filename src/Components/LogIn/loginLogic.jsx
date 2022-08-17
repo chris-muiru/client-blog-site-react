@@ -1,11 +1,12 @@
 export const loginUser = async (e) => {
 	e.preventDefault()
-	const URL = "http://localhost:8000/login"
-	const response = await fetch(URL, {
+	const URL = "http://localhost:8000/auth/login/"
+
+	e.preventDefault()
+	let response = await fetch(URL, {
 		method: "POST",
-		mode: "cors",
 		headers: {
-			"Context-Type": "application/json",
+			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
 			username: e.target.username.value,
