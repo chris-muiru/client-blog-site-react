@@ -1,15 +1,56 @@
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons"
+import { useRef } from "react"
+import { useState } from "react"
 const SignUp = () => {
+	const checkExistDiv = useRef(null)
+	const [msgStatus, setMsgStatus] = useState()
+	const signUp = async (e) => {
+		const URL = "http://localhost:8000/auth/signup/"
+
+		e.preventDefault()
+		let response = await fetch(URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "same-origin",
+			body: JSON.stringify({
+				username: e.target.username.value,
+				email: e.target.email.value,
+				password: e.target.password.value,
+				passwordConfirm: e.target.passwordConfirm.value,
+			}),
+		})
+		let { msg } = await response.json()
+		if (msg === "user exists") {
+			setMsgStatus("User exists!")
+			checkExistDiv.current.style.visibility = "visible"
+		} else if (msg === "user created") {
+			window.location = "/signin"
+		} else if (msg === "incorrect password") {
+			setMsgStatus("passwords don't match")
+			checkExistDiv.current.style.visibility = "visible"
+		} else {
+			setMsgStatus("Invalid")
+			checkExistDiv.current.style.visibility = "visible"
+		}
+	}
+
 	return (
-		<div className="bg-slate-900 pt-10 min-h-screen">
-			<h2 className="text-white text-3xl text-center font-bold mt-6">
-				Sign Up
-			</h2>
-			<div className="w-3/4 m-auto mt-10  lg:w-1/3 md:mt-10">
+		<div className="bg-slate-900 pt-5 min-h-screen">
+			<h2 className="text-white text-3xl text-center font-bold">Sign Up</h2>
+
+			<div className="w-3/4 m-auto  lg:w-1/3 md:mt-1 ">
+				<div
+					ref={checkExistDiv}
+					className="bg-red-600 p-4 rounded-md mb-4 text-center text-white invisible"
+				>
+					{msgStatus}
+				</div>
 				<p className="text-white">Sign up using options:</p>
-				<div className="mt-10 grid grid-cols-2 gap-6 md:gap-22">
+				<div className="mt-5 grid grid-cols-2 gap-6 md:gap-32">
 					<div className="relative bg-green-500 w-full h-20 rounded-md">
 						<FontAwesomeIcon
 							icon={faGoogle}
@@ -26,32 +67,43 @@ const SignUp = () => {
 				</div>
 
 				<div className="mt-20 relative">
-					<form action="" className="flex flex-col space-y-20">
-						<div className="space-y-20">
+					<form
+						method="post"
+						onSubmit={signUp}
+						className="flex flex-col space-y-14"
+					>
+						<div className="space-y-14">
 							<input
 								type="text"
 								placeholder="Username"
-								className="w-full rounded-md p-4"
+								name="username"
+								className="w-full rounded-md p-3"
 							/>
 							<input
 								type="text"
 								placeholder="Email"
-								className="w-full rounded-md p-4"
+								name="email"
+								className="w-full rounded-md p-3"
 							/>
 							<input
 								type="password"
 								placeholder="Password"
-								className="w-full rounded-md p-4"
+								name="password"
+								className="w-full rounded-md p-3"
 							/>
-							{/* <input
+							<input
 								type="password"
+								name="passwordConfirm"
 								placeholder="Confirm password"
-								className="w-full rounded-md p-4"
-							/> */}
+								className="w-full rounded-md p-3"
+							/>
 						</div>
 
-						<button className="w-full text-white bg-green-600 p-5 rounded-md">
-							Log In
+						<button
+							onClick={() => {}}
+							className="w-full text-white bg-green-600 p-5 rounded-md text-bold"
+						>
+							Sign up
 						</button>
 					</form>
 					<p className="text-white mt-5 md:mt-10 pb-20">
