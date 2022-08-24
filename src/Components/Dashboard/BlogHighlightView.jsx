@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const BlogHighlightView = () => {
 	return (
 		<Link to="/blog">
-			<div className="bg-slate-100 text-slate-900 relative min-h-[204px] w-3/4 m-auto rounded-sm p-6">
+			<div className="bg-slate-100 w-full text-slate-900 relative min-h-[204px] m-auto rounded-sm p-6">
 				<h1 className="font-bold text-2xl text-yellow-600">The art of war</h1>
 				<p className="font-semibold">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro

@@ -66,7 +66,7 @@ const SignUp = () => {
 					</div>
 				</div>
 
-				<div className="mt-20 relative">
+				<div className=" mt-10 sm:mt-20 relative">
 					<form
 						method="post"
 						onSubmit={signUp}
