@@ -9,14 +9,12 @@ const LogIn = () => {
 	const loginUser = async (e) => {
 		e.preventDefault()
 		const URL = "http://localhost:8000/auth/login/"
-
-		e.preventDefault()
 		let response = await fetch(URL, {
+			withCredentials: "include",
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			credentials: "same-origin",
 			body: JSON.stringify({
 				username: e.target.username.value,
 				password: e.target.password.value,
@@ -24,7 +22,8 @@ const LogIn = () => {
 		})
 		let { msg } = await response.json()
 		if (msg === "authenticated") {
-			window.location = "/"
+			console.log(response)
+			// window.location = "/"
 		} else {
 			setLoginStatus("Invalid credentials")
 			loginStatusRef.current.style.visibility = "visible"
