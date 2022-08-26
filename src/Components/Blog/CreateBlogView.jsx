@@ -5,7 +5,7 @@ const CreateBlogView = () => {
 	return (
 		<div>
 			<NavBarView />
-			<div className="flex flex-col w-1/2 m-auto ">
+			<div className="flex flex-col m-4 sm:w-1/2 sm:m-auto ">
 				<form action="" class="flex  flex-col items-center space-y-4 mt-5">
 					<input
 						type="text"
