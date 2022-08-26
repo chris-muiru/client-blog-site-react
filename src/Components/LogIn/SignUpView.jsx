@@ -8,7 +8,6 @@ const SignUp = () => {
 	const [msgStatus, setMsgStatus] = useState()
 	const signUp = async (e) => {
 		const URL = "http://localhost:8000/auth/signup/"
-
 		e.preventDefault()
 		let response = await fetch(URL, {
 			method: "POST",
@@ -69,7 +68,7 @@ const SignUp = () => {
 				<div className=" mt-10 sm:mt-20 relative">
 					<form
 						method="post"
-						onSubmit={signUp}
+						onSubmit={{}}
 						className="flex flex-col space-y-14"
 					>
 						<div className="space-y-14">
