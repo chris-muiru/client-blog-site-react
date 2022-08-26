@@ -6,6 +6,7 @@ import BlogView from "../Components/Blog/BlogView"
 import AboutView from "../Components/About/AboutView"
 import ServiceView from "../Components/About/ServiceView"
 import ContactView from "../Components/About/ContactView"
+import PrivateRoutes from "../utils/PrivateRoutes"
 const DashRoutes = () => {
 	return (
 		<Routes>
