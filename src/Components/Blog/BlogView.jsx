@@ -35,7 +35,7 @@ const BlogView = () => {
 				<LikeView />
 				<div className="bg-slate-100 min-h-[200px] mt-10 m-auto rounded-md">
 					{blog &&
-						blog.map(({ title,content }) => {
+						blog.map(({ title, content }) => {
 							return (
 								<div>
 									<p className="text-center font-bold  text-yellow-600 pt-3">
