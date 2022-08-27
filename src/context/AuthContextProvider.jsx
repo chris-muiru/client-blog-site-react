@@ -13,7 +13,7 @@ export function useAuthContext() {
 }
 const AuthContextProvider = ({ children }) => {
 	// stay logged in even after page refresh
-	
+
 	const [authTokens, setAuthTokens] = useState(() =>
 		localStorage.getItem("blogAuthTokens")
 			? JSON.parse(localStorage.getItem("blogAuthTokens"))
@@ -46,7 +46,7 @@ const AuthContextProvider = ({ children }) => {
 	}
 
 	let refreshToken = async (token) => {
-		let response = await fetch(`${BASE}/api/token/refresh/`, {
+		let response = await fetch(`${BASE}api/token/refresh/`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -65,13 +65,13 @@ const AuthContextProvider = ({ children }) => {
 	}
 
 	const getAuthToken = () => {
-		if (jwtDecode(authTokens.access).exp < Date.now() / 1000) {
+		if (!authTokens || jwtDecode(authTokens.access).exp < Date.now() / 1000) {
 			localStorage.clear()
 			window.location = "/signin"
 		}
 		return authTokens.access
 	}
-	
+
 	let context = {
 		loginUser,
 		logOut: logOut,
@@ -80,7 +80,7 @@ const AuthContextProvider = ({ children }) => {
 	useEffect(() => {
 		let interval = setInterval(() => {
 			if (authTokens) {
-				refreshToken()
+				refreshToken(authTokens.refresh)
 			}
 		}, 240000)
 
