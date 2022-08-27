@@ -13,11 +13,7 @@ export function useAuthContext() {
 }
 const AuthContextProvider = ({ children }) => {
 	// stay logged in even after page refresh
-	const [user, setUser] = useState(() =>
-		localStorage.getItem("blogAuthTokens")
-			? jwtDecode(localStorage.getItem("blogAuthTokens"))
-			: null
-	)
+	
 	const [authTokens, setAuthTokens] = useState(() =>
 		localStorage.getItem("blogAuthTokens")
 			? JSON.parse(localStorage.getItem("blogAuthTokens"))
@@ -37,7 +33,6 @@ const AuthContextProvider = ({ children }) => {
 		const dataJson = await response.json()
 		if (response.status === 200) {
 			setAuthTokens(dataJson)
-			setUser(jwtDecode(dataJson.access))
 			localStorage.setItem("blogAuthTokens", JSON.stringify(dataJson))
 			window.location = "/"
 		} else {
@@ -46,7 +41,6 @@ const AuthContextProvider = ({ children }) => {
 	}
 	let logOut = () => {
 		setAuthTokens(null)
-		setUser(null)
 		localStorage.removeItem("authTokens")
 		window.location = "/login"
 	}
@@ -64,7 +58,6 @@ const AuthContextProvider = ({ children }) => {
 		let dataJson = await response.json()
 		if (response.status === 200) {
 			setAuthTokens(dataJson)
-			setUser(jwtDecode(dataJson.access))
 			localStorage.setItem("blogAuthTokens", JSON.stringify(dataJson))
 		} else {
 			window.location = "/signin"
@@ -78,25 +71,24 @@ const AuthContextProvider = ({ children }) => {
 		}
 		return authTokens.access
 	}
-	console.log(authTokens)
+	
 	let context = {
-		user: user,
 		loginUser,
 		logOut: logOut,
 		getAuthToken: getAuthToken,
 	}
-// 	useEffect(() => {
-// 		let interval = setInterval(() => {
-// 			if (authTokens) {
-// 				refreshToken()
-// 			}
-// 		}, 240000)
-// 
-// 		// cleanup
-// 		return () => {
-// 			clearInterval(interval)
-// 		}
-// 	}, [authTokens])
+	useEffect(() => {
+		let interval = setInterval(() => {
+			if (authTokens) {
+				refreshToken()
+			}
+		}, 240000)
+
+		// cleanup
+		return () => {
+			clearInterval(interval)
+		}
+	}, [authTokens])
 	return (
 		<AuthContext.Provider value={context}>{children}</AuthContext.Provider>
 	)
