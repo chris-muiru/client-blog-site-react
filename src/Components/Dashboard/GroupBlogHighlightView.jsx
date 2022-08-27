@@ -26,14 +26,15 @@ const GroupBlogHighlightView = () => {
 	return (
 		<div className="flex m-auto  w-11/12 sm:w-7/12  flex-wrap space-y-10 mt-4">
 			{blogs &&
-				blogs.map(({ title, content, blogtype }) => {
+				blogs.map(({ title, content, blogType, id }) => {
 					console.log(title)
 
 					return (
 						<BlogHighlight
 							title={title}
 							content={content}
-							blogtype={blogtype}
+							blogType={blogType}
+							blogId={id}
 						/>
 					)
 				})}
