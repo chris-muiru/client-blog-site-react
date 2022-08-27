@@ -12,7 +12,7 @@ const DashRoutes = () => {
 		<Routes>
 			<Route path="/" element={<Dash />} />
 			<Route path="/new" element={<CreateBlog />} />
-			<Route path="/blog" element={<BlogView />} />
+			<Route path="/blog/:blogId" element={<BlogView />} />
 			<Route path="/about" element={<AboutView />} />
 			<Route path="/service" element={<ServiceView />} />
 			<Route path="/contact" element={<ContactView />} />
