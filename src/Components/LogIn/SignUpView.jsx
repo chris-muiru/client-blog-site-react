@@ -68,7 +68,7 @@ const SignUp = () => {
 				<div className=" mt-10 sm:mt-20 relative">
 					<form
 						method="post"
-						onSubmit={{}}
+						onSubmit={signUp}
 						className="flex flex-col space-y-14"
 					>
 						<div className="space-y-14">
