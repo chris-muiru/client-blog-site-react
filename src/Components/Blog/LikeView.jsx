@@ -22,8 +22,10 @@ const LikeView = () => {
 				Authorization: `Bearer ${getAuthToken()}`,
 			},
 		})
-		let { likes } = await response.json()
-		setLikes(likes)
+		if (response.status === 200) {
+			let { likes } = await response.json()
+			setLikes(likes)
+		}
 	}
 	const postLikeByBlogId = async () => {
 		let response = await fetch(LikesUrl, {
