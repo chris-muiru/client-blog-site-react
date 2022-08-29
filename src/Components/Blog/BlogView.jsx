@@ -24,7 +24,6 @@ const BlogView = () => {
 		setBlog([dataJson])
 		console.log(dataJson)
 	}
-	console.log(blog)
 	useEffect(() => {
 		fetchBlogById()
 	}, [])
@@ -35,13 +34,34 @@ const BlogView = () => {
 				<LikeView />
 				<div className="bg-slate-100 min-h-[200px] mt-10 m-auto rounded-md">
 					{blog &&
-						blog.map(({ title, content }) => {
+						blog.map(({ title, content, createdAt }) => {
+							let date = new Date(createdAt)
+							let months = [
+								"Jan",
+								"Feb",
+								"Mar",
+								"Apr",
+								"May",
+								"June",
+								"July",
+								"Aug",
+								"Sep",
+								"Oct",
+								"Nov",
+								"Dec",
+							]
+
 							return (
-								<div>
+								<div className="relative">
 									<p className="text-center font-bold  text-yellow-600 pt-3">
 										{title}
 									</p>
-									<div className="p-4 sm:p-10 text-slate-900 font-semibold">
+									<small className="absolute right-0 top-7 text-green-700">
+										{`
+										${date.getDate()} 
+										${months[date.getMonth()]}, ${date.getFullYear()}`}
+									</small>
+									<div className="p-4 sm:p-10 text-slate-900 font-semibold text-justify">
 										{content}
 									</div>
 								</div>
