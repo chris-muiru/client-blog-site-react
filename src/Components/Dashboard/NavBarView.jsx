@@ -1,8 +1,31 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useAuthContext } from "../../context/AuthContextProvider"
 import logo from "./../../logo/transparent-eagle-slinger.svg"
 import SideNavView from "./SideNavView"
 const NavBarView = () => {
+	const { canCreateBlog } = useAuthContext()
+
+	const displayBlogButtonIfTrue = (status) => {
+		if (status === true) {
+			console.log("ok")
+			return [
+				<div className="flex md:order-2">
+					<Link to="/new">
+						<button
+							type="button"
+							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600"
+						>
+							Create Blog
+						</button>
+					</Link>
+				</div>,
+			]
+		} else {
+			return []
+		}
+	}
+	console.log(canCreateBlog)
 	return (
 		<div className="bg-gray-900 min-h-[100px]">
 			<nav className="px-2 py-2.5 sm:px-4">
@@ -38,16 +61,7 @@ const NavBarView = () => {
 							slinger
 						</span>
 					</div>
-					<div className="flex md:order-2">
-						<Link to="/new">
-							<button
-								type="button"
-								className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600"
-							>
-								Create Blog
-							</button>
-						</Link>
-					</div>
+					{displayBlogButtonIfTrue(canCreateBlog)}
 					<div
 						className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
 						id="navbar-cta"
