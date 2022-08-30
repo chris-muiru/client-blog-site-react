@@ -13,7 +13,6 @@ export function useAuthContext() {
 }
 const AuthContextProvider = ({ children }) => {
 	// stay logged in even after page refresh
-
 	const [authTokens, setAuthTokens] = useState(() =>
 		localStorage.getItem("blogAuthTokens")
 			? JSON.parse(localStorage.getItem("blogAuthTokens"))
@@ -21,12 +20,9 @@ const AuthContextProvider = ({ children }) => {
 	)
 	const [user, setUser] = useState(() =>
 		localStorage.getItem("blogAuthTokens")
-			? jwtDecode(localStorage.getItem("blogAuthTokens"))
+			? jwtDecode(JSON.parse(localStorage.getItem("blogAuthTokens")).access)
 			: null
 	)
-
-	const [isPermitted, setIsPermitted] = useState(false)
-	console.log(user)
 	let loginUser = async (e) => {
 		e.preventDefault()
 		const response = await fetch(`${BASE}/api/token/`, {
@@ -79,26 +75,11 @@ const AuthContextProvider = ({ children }) => {
 		}
 		return authTokens.access
 	}
-	const canCreateBlog = async () => {
-		let response = await fetch(`${BASE}/blog/isPermitted/`, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${authTokens.access}`,
-			},
-		})
-		if (response.status === 200) {
-			let dataJson = await response.json()
-			setIsPermitted(dataJson)
-		} else {
-			setIsPermitted(false)
-		}
-	}
+
 	let context = {
 		loginUser,
 		logOut: logOut,
 		getAuthToken: getAuthToken,
-		canCreateBlog: isPermitted,
 	}
 	useEffect(() => {
 		let interval = setInterval(() => {
@@ -112,9 +93,7 @@ const AuthContextProvider = ({ children }) => {
 			clearInterval(interval)
 		}
 	}, [authTokens])
-	useEffect(() => {
-		canCreateBlog()
-	}, [])
+
 	return (
 		<AuthContext.Provider value={context}>{children}</AuthContext.Provider>
 	)
