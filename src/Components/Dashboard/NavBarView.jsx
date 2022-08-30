@@ -1,11 +1,29 @@
 import React from "react"
+import { useEffect } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useAuthContext } from "../../context/AuthContextProvider"
 import logo from "./../../logo/transparent-eagle-slinger.svg"
 import SideNavView from "./SideNavView"
 const NavBarView = () => {
-	const { canCreateBlog } = useAuthContext()
+	const { getAuthToken } = useAuthContext()
 
+	const [isPermitted, setIsPermitted] = useState(false)
+	const canCreateBlog = async () => {
+		let response = await fetch("http://localhost:8000/blog/isPermitted/", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${getAuthToken()}`,
+			},
+		})
+		if (response.status === 200) {
+			let dataJson = await response.json()
+			setIsPermitted(dataJson)
+		} else {
+			setIsPermitted(false)
+		}
+	}
 	const displayBlogButtonIfTrue = (status) => {
 		if (status === true) {
 			console.log("ok")
@@ -25,7 +43,9 @@ const NavBarView = () => {
 			return []
 		}
 	}
-	console.log(canCreateBlog)
+	useEffect(() => {
+		canCreateBlog()
+	})
 	return (
 		<div className="bg-gray-900 min-h-[100px]">
 			<nav className="px-2 py-2.5 sm:px-4">
@@ -61,7 +81,7 @@ const NavBarView = () => {
 							slinger
 						</span>
 					</div>
-					{displayBlogButtonIfTrue(canCreateBlog)}
+					{displayBlogButtonIfTrue(isPermitted)}
 					<div
 						className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
 						id="navbar-cta"
