@@ -1,3 +1,5 @@
+import { faSignOut } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import { useEffect } from "react"
 import { useState } from "react"
@@ -6,7 +8,7 @@ import { useAuthContext } from "../../context/AuthContextProvider"
 import logo from "./../../logo/transparent-eagle-slinger.svg"
 import SideNavView from "./SideNavView"
 const NavBarView = () => {
-	const { getAuthToken } = useAuthContext()
+	const { getAuthToken, user, logOut } = useAuthContext()
 
 	const [isPermitted, setIsPermitted] = useState(false)
 	const canCreateBlog = async () => {
@@ -26,7 +28,6 @@ const NavBarView = () => {
 	}
 	const displayBlogButtonIfTrue = (status) => {
 		if (status === true) {
-			console.log("ok")
 			return [
 				<div className="flex md:order-2">
 					<Link to="/new">
@@ -49,14 +50,8 @@ const NavBarView = () => {
 	return (
 		<div className="bg-gray-900 min-h-[100px]">
 			<nav className="px-2 py-2.5 sm:px-4">
-				<div className="container flex flex-wrap justify-between items-center mx-auto">
-					<button
-						data-collapse-toggle="navbar-cta"
-						type="button"
-						className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-						aria-controls="navbar-cta"
-						aria-expanded="false"
-					>
+				<div className="container flex flex-wrap justify-between items-center mx-auto relative">
+					<button className="inline-flex items-center p-2 text-blue-500 md:hidden">
 						<svg
 							className="w-6 h-6"
 							aria-hidden="true"
@@ -77,11 +72,12 @@ const NavBarView = () => {
 							className="h-24 inline-block"
 							alt="slinger logo"
 						/>
-						<span className=" absolute top-8 right-7 text-xl font-semibold text-white">
-							slinger
+						<span className=" absolute top-9 left-20  text-xl font-semibold text-white">
+							{user}
 						</span>
 					</div>
 					{displayBlogButtonIfTrue(isPermitted)}
+
 					<div
 						className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
 						id="navbar-cta"
@@ -118,6 +114,12 @@ const NavBarView = () => {
 								>
 									Contact
 								</Link>
+							</li>
+							<li className="text-green-500">
+								<button onClick={logOut}>
+									logOut &nbsp; &nbsp;
+									<FontAwesomeIcon icon={faSignOut} />
+								</button>
 							</li>
 						</ul>
 					</div>
