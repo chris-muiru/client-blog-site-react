@@ -1,9 +1,11 @@
 import React, { useEffect } from "react"
+import { useState } from "react"
 import { useAuthContext } from "../../context/AuthContextProvider"
 import NavBarView from "../Dashboard/NavBarView"
 
 const CreateBlogView = () => {
 	const { getAuthToken } = useAuthContext()
+	const [blogType, setBlogType] = useState('')
 	const blogUrl = `http://localhost:8000/blog/`
 	const createBlog = async (e) => {
 		e.preventDefault()
@@ -24,8 +26,29 @@ const CreateBlogView = () => {
 		window.location = "/"
 	}
 
+	const getBlogType = async () => {
+		const getBlogUrl = "http://localhost:8000/blog/type/"
+		const response = await fetch(getBlogUrl, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${getAuthToken()}`,
+			},
+		})
+		setBlogType(await response.json())
+	}
+
+	const displayBlogTypeOptions = () => {
+		return (
+			blogType &&
+			blogType.map(([value, display]) => {
+				return <option value={value}>{display}</option>
+			})
+		)
+	}
 	useEffect(() => {
 		createBlog()
+		getBlogType()
 	}, [])
 	return (
 		<div>
@@ -42,12 +65,13 @@ const CreateBlogView = () => {
 						placeholder="Title"
 						className="pl-10 text-white w-full h-24 rounded-md bg-slate-700"
 					/>
-					<input
-						name="blogType"
-						type="text"
-						placeholder="Genre"
+
+					<select
 						className="pl-10  text-white w-full h-24  rounded-md bg-slate-700"
-					/>
+						name="blogType"
+					>
+						{displayBlogTypeOptions()}
+					</select>
 					<textarea
 						name="content"
 						type="text"
