@@ -29,8 +29,8 @@ const BlogHighlightView = ({
 				<small className="absolute right-0 top-7 text-green-700">{`
 				${date.getDate()} 
 				${months[date.getMonth()]}, ${date.getFullYear()}`}</small>
-				<p className="font-semibold text-justify">
-					{content.substr(0, 800)}...
+				<p className="font-semibold text-justify whitespace-pre-line">
+					{content.substr(0, 200)}...
 				</p>
 				<p className="absolute font-bold bottom-0 text-green-700">
 					by {writterName}
