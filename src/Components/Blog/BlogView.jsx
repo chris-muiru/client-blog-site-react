@@ -7,7 +7,6 @@ import NavBarView from "../Dashboard/NavBarView"
 import CommentView from "./CommentView"
 import DeleteBlogView from "./DeleteBlogView"
 import LikeView from "./LikeView"
-
 const BlogView = () => {
 	let { getAuthToken } = useAuthContext()
 	const [isBlogOwner, setIsBlogOwner] = useState(false)
@@ -90,7 +89,7 @@ const BlogView = () => {
 										${date.getDate()} 
 										${months[date.getMonth()]}, ${date.getFullYear()}`}
 										</small>
-										<div className="p-4 sm:p-10 text-slate-900 font-semibold text-justify">
+										<div className="p-4 sm:p-10 text-slate-900 font-semibold text-justify whitespace-pre-line">
 											{content}
 										</div>
 									</div>
