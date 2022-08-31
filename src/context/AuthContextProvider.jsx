@@ -23,6 +23,7 @@ const AuthContextProvider = ({ children }) => {
 			? jwtDecode(JSON.parse(localStorage.getItem("blogAuthTokens")).access)
 			: null
 	)
+	console.log(user)
 	let loginUser = async (e) => {
 		e.preventDefault()
 		const response = await fetch(`${BASE}/api/token/`, {
@@ -50,7 +51,7 @@ const AuthContextProvider = ({ children }) => {
 	}
 
 	let refreshToken = async (token) => {
-		let response = await fetch(`${BASE}api/token/refresh/`, {
+		let response = await fetch(`${BASE}/api/token/refresh/`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -69,7 +70,7 @@ const AuthContextProvider = ({ children }) => {
 	}
 
 	const getAuthToken = () => {
-		if (!authTokens || jwtDecode(authTokens.access).exp < Date.now() / 1000) {
+		if (!authTokens || user.exp < Date.now() / 1000) {
 			localStorage.clear()
 			window.location = "/signin"
 		}
@@ -77,6 +78,7 @@ const AuthContextProvider = ({ children }) => {
 	}
 
 	let context = {
+		user: user && user.name,
 		loginUser,
 		logOut: logOut,
 		getAuthToken: getAuthToken,
