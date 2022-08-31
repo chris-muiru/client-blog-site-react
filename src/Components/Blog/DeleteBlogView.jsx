@@ -6,7 +6,6 @@ import { useAuthContext } from "../../context/AuthContextProvider"
 
 const DeleteBlogView = () => {
 	const { blogId } = useParams()
-	console.log(blogId)
 	const { getAuthToken } = useAuthContext()
 	const deleteBlogById = async (blogId) => {
 		let URL = `http://localhost:8000/blog/${blogId}/`
