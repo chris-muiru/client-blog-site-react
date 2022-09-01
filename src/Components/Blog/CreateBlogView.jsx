@@ -2,10 +2,9 @@ import React, { useEffect } from "react"
 import { useState } from "react"
 import { useAuthContext } from "../../context/AuthContextProvider"
 import NavBarView from "../Dashboard/NavBarView"
-
 const CreateBlogView = () => {
 	const { getAuthToken } = useAuthContext()
-	const [blogType, setBlogType] = useState('')
+	const [blogType, setBlogType] = useState("")
 	const blogUrl = `http://localhost:8000/blog/`
 	const createBlog = async (e) => {
 		e.preventDefault()
@@ -52,7 +51,7 @@ const CreateBlogView = () => {
 	}, [])
 	return (
 		<div>
-			<NavBarView />
+			<NavBarView disableCreateBlogButton={true} />
 			<div className="flex flex-col m-4 sm:w-1/2 sm:m-auto ">
 				<form
 					method="post"
