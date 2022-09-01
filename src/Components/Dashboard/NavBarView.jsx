@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import { useAuthContext } from "../../context/AuthContextProvider"
 import logo from "./../../logo/transparent-eagle-slinger.svg"
 import SideNavView from "./SideNavView"
-const NavBarView = () => {
+const NavBarView = ({ disableCreateBlogButton }) => {
 	const { getAuthToken, user, logOut } = useAuthContext()
 
 	const [isPermitted, setIsPermitted] = useState(false)
@@ -27,7 +27,7 @@ const NavBarView = () => {
 		}
 	}
 	const displayBlogButtonIfTrue = (status) => {
-		if (status === true) {
+		if (status === true && disableCreateBlogButton !== true) {
 			return [
 				<div className="flex md:order-2">
 					<Link to="/new">
