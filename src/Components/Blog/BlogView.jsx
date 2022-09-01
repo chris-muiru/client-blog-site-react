@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useAuthContext } from "../../context/AuthContextProvider"
 import NavBarView from "../Dashboard/NavBarView"
+import Markdown from "marked-react"
 import CommentView from "./CommentView"
 import DeleteBlogView from "./DeleteBlogView"
 import LikeView from "./LikeView"
@@ -48,7 +49,7 @@ const BlogView = () => {
 			setIsBlogOwner(false)
 		}
 	}
-	// console.log(isBlogOwner)
+
 	useEffect(() => {
 		fetchBlogById()
 		getBlogOwner(blogId)
@@ -79,7 +80,7 @@ const BlogView = () => {
 								]
 
 								return (
-									<div className="relative">
+									<div className="relative ">
 										{displayDeleteBtnIfTrue(isBlogOwner)}
 										<p className="text-center font-bold  text-yellow-600 pt-3">
 											{title}
@@ -89,8 +90,8 @@ const BlogView = () => {
 										${date.getDate()} 
 										${months[date.getMonth()]}, ${date.getFullYear()}`}
 										</small>
-										<div className="p-4 sm:p-10 text-slate-900 font-semibold text-justify whitespace-pre-line">
-											{content}
+										<div className="p-4 sm:p-10 text-slate-900 font-semibold text-justify whitespace-pre-line overflow-auto">
+											<Markdown>{content}</Markdown>
 										</div>
 									</div>
 								)
