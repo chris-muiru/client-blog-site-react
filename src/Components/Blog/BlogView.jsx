@@ -4,10 +4,10 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useAuthContext } from "../../context/AuthContextProvider"
 import NavBarView from "../Dashboard/NavBarView"
-import Markdown from "marked-react"
-import CommentView from "./CommentView"
 import DeleteBlogView from "./DeleteBlogView"
 import LikeView from "./LikeView"
+import Markdown from "marked-react"
+import CommentGroupView from "./CommentGroupView"
 const BlogView = () => {
 	let { getAuthToken } = useAuthContext()
 	const [isBlogOwner, setIsBlogOwner] = useState(false)
@@ -50,6 +50,10 @@ const BlogView = () => {
 		}
 	}
 
+	// TODO: find a way to prevent using overflow on content div
+	// let createMarkDown = (content) => {
+	// 	return { __html: marked.parse(content) }
+	// }
 	useEffect(() => {
 		fetchBlogById()
 		getBlogOwner(blogId)
@@ -80,7 +84,7 @@ const BlogView = () => {
 								]
 
 								return (
-									<div className="relative ">
+									<div className="relative">
 										{displayDeleteBtnIfTrue(isBlogOwner)}
 										<p className="text-center font-bold  text-yellow-600 pt-3">
 											{title}
@@ -90,12 +94,13 @@ const BlogView = () => {
 										${date.getDate()} 
 										${months[date.getMonth()]}, ${date.getFullYear()}`}
 										</small>
-										<div className="p-4 sm:p-10 text-slate-900 font-semibold text-justify whitespace-pre-line overflow-auto">
+										<p className="p-4 sm:p-10 text-slate-900 overflow-scroll ">
 											<Markdown>{content}</Markdown>
-										</div>
+										</p>
 									</div>
 								)
 							})}
+						<CommentGroupView blogId={blogId} />
 					</div>
 				</div>
 			</div>
