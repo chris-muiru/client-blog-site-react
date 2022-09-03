@@ -2,7 +2,6 @@ import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useAuthContext } from "../../context/AuthContextProvider"
-import CommentView from "./CommentView"
 
 const CommentGroupView = ({ commentsExist, blogId }) => {
 	const BLOGURL = `http://localhost:8000/blog/comment/${blogId}/`
