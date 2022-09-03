@@ -30,10 +30,10 @@ const BlogHighlightView = ({
 				<small className="absolute right-0 top-7 text-bold text-green-700">{`
 				${date.getDate()} 
 				${months[date.getMonth()]}, ${date.getFullYear()}`}</small>
-				<p className="font-semibold text-justify whitespace-pre-line pr-14 ">
+				<p className=" text-justify whitespace-pre-line pr-14 ">
 					<Markdown>{content}</Markdown>
 				</p>
-				<p className="absolute font-bold bottom-0 right-0  text-green-700 pt-10">
+				<p className="absolute  bottom-0 right-0  text-green-700 pt-10">
 					by {writterName}
 				</p>
 			</div>
