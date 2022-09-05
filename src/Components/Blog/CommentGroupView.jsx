@@ -16,7 +16,7 @@ const CommentGroupView = ({ commentsExist, blogId }) => {
 			},
 		})
 		if (response.status === 200) {
-			setComments([...(await response.json())].slice(0, 6))
+			setComments([...(await response.json())]).slice(0,7)
 		}
 	}
 	console.log(comments)
