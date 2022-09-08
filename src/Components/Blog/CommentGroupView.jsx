@@ -75,7 +75,7 @@ const CommentGroupView = ({ commentsExist, blogId }) => {
 						<input
 							id="comment"
 							name="comment"
-							className="rounded-sm h-20 w-1/2 focus:outline-none border text"
+							className="rounded-sm h-20 w-full md:w-3/4 focus:outline-none border text"
 							type="text"
 						/>
 						<div className="space-x-2 text-blue-700">

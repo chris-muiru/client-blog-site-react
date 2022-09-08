@@ -52,7 +52,7 @@ const CreateBlogView = () => {
 	return (
 		<div>
 			<NavBarView disableCreateBlogButton={true} />
-			<div className="flex flex-col m-4 sm:w-1/2 sm:m-auto ">
+			<div className="w-11/12 flex flex-col m-4 lg:w-7/12 sm:m-auto ">
 				<form
 					method="post"
 					onSubmit={createBlog}

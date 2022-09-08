@@ -61,10 +61,10 @@ const BlogView = () => {
 	return (
 		<>
 			<NavBarView />
-			<div className="w-11/12 sm:w-3/4 relative  m-auto">
+			<div className="w-11/12 lg:w-3/4 relative  m-auto">
 				<LikeView />
 				<div>
-					<div className="bg-slate-100 min-h-[200px] mt-10 m-auto rounded-md">
+					<div className="text-sm  bg-slate-100 min-h-[200px] mt-10 m-auto rounded-md">
 						{blog &&
 							blog.map(({ title, content, createdAt }) => {
 								let date = new Date(createdAt)
