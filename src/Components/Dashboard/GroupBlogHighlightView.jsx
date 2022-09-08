@@ -23,7 +23,7 @@ const GroupBlogHighlightView = () => {
 		fetchBlogs()
 	}, [])
 	return (
-		<div className="flex m-auto  w-11/12 sm:w-7/12  flex-wrap space-y-10 mt-4 mb-10">
+		<div className="flex m-auto  w-11/12 xl:w-7/12 flex-col space-y-10 mt-4 mb-10">
 			{blogs &&
 				blogs.map(
 					({ title, content, blogType, id, createdAt, writterName }) => {
