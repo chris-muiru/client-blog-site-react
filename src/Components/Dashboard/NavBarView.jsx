@@ -1,16 +1,17 @@
-import { faSignOut } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
+import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import { useAuthContext } from "../../context/AuthContextProvider"
 import logo from "./../../logo/transparent-eagle-slinger.svg"
+import { faSignOut } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import SideNavView from "./SideNavView"
+import { useRef } from "react"
 const NavBarView = ({ disableCreateBlogButton }) => {
 	const { getAuthToken, user, logOut } = useAuthContext()
-
 	const [isPermitted, setIsPermitted] = useState(false)
+	const toggleNavControlRef = useRef()
 	const canCreateBlog = async () => {
 		let response = await fetch("http://localhost:8000/blog/isPermitted/", {
 			method: "GET",
@@ -44,14 +45,29 @@ const NavBarView = ({ disableCreateBlogButton }) => {
 			return []
 		}
 	}
+
+	let toggleNavControl = () => {
+		if (toggleNavControlRef) {
+			if (toggleNavControlRef.current.style.display === "block") {
+				toggleNavControlRef.current.style.display = "none"
+			} else {
+				console.log(toggleNavControlRef.current.style.display)
+				toggleNavControlRef.current.style.display = "block"
+			}
+		}
+	}
 	useEffect(() => {
 		canCreateBlog()
 	})
 	return (
-		<div className="bg-gray-900 min-h-[100px]">
+		<div className="bg-gray-900 min-h-[100px] relative">
 			<nav className="px-2 py-2.5 sm:px-4">
 				<div className="container flex flex-wrap justify-between items-center mx-auto relative">
-					<button className="inline-flex items-center p-2 text-blue-500 md:hidden">
+					<button
+						id="menu"
+						className="inline-flex items-center p-2 text-blue-500 md:hidden"
+						onClick={toggleNavControl}
+					>
 						<svg
 							className="w-6 h-6"
 							aria-hidden="true"
@@ -77,16 +93,15 @@ const NavBarView = ({ disableCreateBlogButton }) => {
 						</span>
 					</div>
 					{displayBlogButtonIfTrue(isPermitted)}
-
 					<div
+						ref={toggleNavControlRef}
 						className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
-						id="navbar-cta"
 					>
-						<ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+						<ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 text-white">
 							<li>
 								<Link
 									to="#"
-									className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+									className="block py-2 pr-4 pl-3 text-blue-500 font-bold  rounded md:p-0 "
 								>
 									<Link to="/">Home</Link>
 								</Link>
@@ -94,7 +109,7 @@ const NavBarView = ({ disableCreateBlogButton }) => {
 							<li>
 								<Link
 									to="/about"
-									className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+									className="block py-2 pr-4 pl-3 rounded md:p-0"
 								>
 									About
 								</Link>
@@ -102,7 +117,7 @@ const NavBarView = ({ disableCreateBlogButton }) => {
 							<li>
 								<Link
 									to="/service"
-									className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+									className="block py-2 pr-4 pl-3  rounded md:p-0 "
 								>
 									Service
 								</Link>
@@ -110,15 +125,20 @@ const NavBarView = ({ disableCreateBlogButton }) => {
 							<li>
 								<Link
 									to="/contact"
-									className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+									className="block py-2 pr-4 pl-3 rounded md:p-0"
 								>
 									Contact
 								</Link>
 							</li>
-							<li className="text-green-500">
-								<button onClick={logOut}>
-									logOut &nbsp; &nbsp;
-									<FontAwesomeIcon icon={faSignOut} />
+							<li>
+								<button
+									onClick={logOut}
+									className="block  py-2  pr-4 pl-3  rounded  md:p-0"
+								>
+									<span className="text-green-500">
+										logOut &nbsp; &nbsp;
+										<FontAwesomeIcon icon={faSignOut} />
+									</span>
 								</button>
 							</li>
 						</ul>
